@@ -2,8 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   getVisitCount()
 })
 
-const functionAPI =
-  "https://carlsresume.azurewebsites.net/api/getCount?code=RhezCd59IqyZj0M1KgkCDMesqB3lV-wqi61ho0EFMIyWAzFuKc66bw=="
+const functionAPI = ""
 
 const getVisitCount = () => {
   let count = 30
