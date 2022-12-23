@@ -12,7 +12,7 @@ const getVisitCount = () => {
       return res.json()
     })
     .then((res) => {
-      console.log(" Website called function API!!")
+      console.log(" Hire me, please!")
       count = res.count
       document.getElementById("counter").innerText = count
     })
