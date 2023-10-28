@@ -2,38 +2,38 @@
 
 ## Table of Contents
 
-1. [Project Description](#introduction)
-2. [To be done](#next)
-3. [Building Static Website](#buildsite)
-4. [Deployment of Azure Function](#DAzureFunction)
-5. [Deployment of Website to Azure](#DWebsiteAzure)
-6. [Building CI/CD pipeline](#CI/CD)
+1. [Project Description](#project-description)
+2. [To Be Done](#to-be-done)
+3. [Building Static Website](#building-static-website)
+4. [Deployment of Azure Function](#deployment-of-azure-function)
+5. [Deployment of Website to Azure](#deployment-of-website-to-azure)
+6. [Building CI/CD Pipeline](#building-cicd-pipeline)
 
-## Description <a name="introduction"></a>
+## Project Description
 
-- The Cloud Resume Challenge is a hands-on project designed to help bridge the gap from cloud certification to cloud job. It incorporates many of the skills that real cloud and DevOps engineers use in their daily work. Cloud challenge was designed by [Forrest Brazeal.](https://forrestbrazeal.com/) More information about the challenge can be found on official [website.](https://cloudresumechallenge.dev/)
-- Key objectives for the project
-  - Write static website in HTLM and styled in CSS
-  - Deploy static website in Azure storage
-  - Setup access to website via secure protocol HTTPS
-  - Connect website to custom DNS domain name
-  - Create visitor counter for the website with JavaScript and Azure’s Functions in Python
-  - Store visit counts in Azure CosmosDB
-  - Use API to establish communication between CosmosDB, Azure Functions and website
-  - Create unit tests for Azure’s Functions in Python
-  - Set up GitHub Actions for CI/CD deployment
+- The Cloud Resume Challenge is a hands-on project designed to bridge the gap between cloud certification and a cloud job. It encompasses many of the skills that real cloud and DevOps engineers use daily. The challenge was designed by [Forrest Brazeal](https://forrestbrazeal.com/). More information about the challenge can be found on the official [website](https://cloudresumechallenge.dev/).
+- Key objectives for the project:
+  - Write a static website in HTML and style it with CSS.
+  - Deploy the static website to Azure storage.
+  - Set up access to the website via the secure HTTPS protocol.
+  - Connect the website to a custom DNS domain name.
+  - Create a visitor counter for the website using JavaScript and Azure Functions in Python.
+  - Store visit counts in Azure CosmosDB.
+  - Use an API to establish communication between CosmosDB, Azure Functions, and the website.
+  - Create unit tests for Azure Functions in Python.
+  - Set up GitHub Actions for CI/CD deployment.
 
-## To be done <a name="next"></a>
+## To Be Done
 
-- Create resume and host it in Azure’s General Purpose v2 storage
-- Create Azure Key Vault and store all secrets securely
-- Incorporate Terraform to build resources in Azure
+- Create a resume and host it in Azure’s General Purpose v2 storage.
+- Create an Azure Key Vault and store all secrets securely.
+- Incorporate Terraform to build resources in Azure.
 
-## Building Static Website <a name="buildsite"></a>
+## Building Static Website
 
-- Create project in [GitHub](https://github.com/join)
-  - clone repository locally
-  ```
+- Create a project on [GitHub](https://github.com/join).
+  - Clone the repository locally:
+  ```bash
   git clone git@github.com:carlpadilla/cloud-resume-azure.git
   ```
 - [Download website template](https://www.styleshout.com/) to not start from complete scratch
