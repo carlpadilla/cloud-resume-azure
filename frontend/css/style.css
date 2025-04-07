@@ -1,76 +1,451 @@
-/*
----------------------------------------------------------------------------------
-	STRIPPED DOWN RESUME TEMPLATE
-    html resume
 
-    v0.9: 5/28/09
+        /* --- Global Resets and Variables --- */
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
 
-    design and code by: thingsthatarebrown.com 
-                        (matt brown)
----------------------------------------------------------------------------------
-*/
+        :root {
+          --bg-color: #0d1117; /* GitHub dark mode background */
+          --text-color: #c9d1d9; /* GitHub dark mode text */
+          --primary-accent: #58a6ff; /* GitHub dark mode primary blue */
+          --secondary-accent: #3fb950; /* GitHub dark mode green */
+          --border-color: #30363d; /* GitHub dark mode border */
+          --terminal-green: #39ff14; /* Neon green for hacker accents */
+          --font-mono: 'Roboto Mono', monospace;
+          --scanline-opacity: 0.05; /* Opacity for scanline effect */
+          --glow-color: rgba(57, 255, 20, 0.7); /* Neon green glow */
+        }
+
+        body {
+          font-family: var(--font-mono);
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          line-height: 1.6;
+          font-size: 16px; /* Base font size */
+          overflow-x: hidden; /* Prevent horizontal scroll */
+          position: relative; /* Needed for scanlines pseudo-element */
+        }
+
+        /* Optional: Subtle Scanlines Effect */
+        body::after {
+          content: " ";
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%
+          );
+          background-size: 100% 4px; /* Adjust size of scanlines */
+          z-index: -1; /* Place behind content */
+          opacity: var(--scanline-opacity);
+          pointer-events: none; /* Allow clicking through */
+          animation: scanline-anim 10s linear infinite;
+        }
+
+        @keyframes scanline-anim {
+          0% { background-position: 0 0; }
+          100% { background-position: 0 -20px; } /* Adjust speed */
+        }
+
+        /* --- Layout --- */
+        .container {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 20px;
+          border-left: 1px solid var(--border-color);
+          border-right: 1px solid var(--border-color);
+        }
+
+        /* --- Header --- */
+        .header {
+          padding: 30px 0;
+          margin-bottom: 40px;
+          border-bottom: 1px dashed var(--border-color);
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+        .header-main h1 {
+          font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+          color: var(--terminal-green);
+          text-shadow: 0 0 5px var(--glow-color);
+          margin-bottom: 5px;
+          min-height: 1.2em; /* Prevent layout shift during typing */
+          white-space: nowrap; /* Keep title on one line during typing */
+        }
+
+        .header-main h2 {
+          font-size: clamp(1rem, 3vw, 1.2rem);
+          color: var(--primary-accent);
+          margin-bottom: 15px;
+        }
+
+        .contact-info {
+          text-align: right;
+        }
+
+        .contact-info h3 {
+          font-size: clamp(0.9rem, 2.5vw, 1rem);
+          margin-bottom: 5px;
+          font-weight: normal;
+        }
+
+        /* --- Links & Glitch Effect --- */
+        a {
+          color: var(--primary-accent);
+          text-decoration: none;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover, a:focus {
+          color: var(--terminal-green);
+          text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .link-glitch {
+          position: relative;
+          display: inline-block; /* Necessary for pseudo-elements */
+        }
+
+        /* Use JS to add data-text for glitch */
+        /* Apply glitch effect only when data-text attribute is present */
+        .link-glitch[data-text]:hover::before,
+        .link-glitch[data-text]:hover::after {
+          content: attr(data-text); /* Use data-text */
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: var(--bg-color); /* Match background */
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+        }
+
+        .link-glitch[data-text]:hover::before {
+          left: 2px;
+          text-shadow: -1px 0 var(--secondary-accent);
+          animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .link-glitch[data-text]:hover::after {
+          left: -2px;
+          text-shadow: -1px 0 var(--primary-accent);
+          animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.3deg); }
+            5% { clip: rect(17px, 9999px, 94px, 0); transform: skew(0.8deg); }
+            10% { clip: rect(40px, 9999px, 67px, 0); transform: skew(0.1deg); }
+            /* Add more steps for variation */
+            100% { clip: rect(85px, 9999px, 90px, 0); transform: skew(0.5deg); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(15px, 9999px, 80px, 0); transform: skew(-0.2deg); }
+            4% { clip: rect(55px, 9999px, 64px, 0); transform: skew(-0.6deg); }
+            8% { clip: rect(30px, 9999px, 45px, 0); transform: skew(-0.3deg); }
+            /* Add more steps for variation */
+            100% { clip: rect(70px, 9999px, 75px, 0); transform: skew(-0.4deg); }
+        }
 
 
-.msg { padding: 10px; background: #222; position: relative; }
-.msg h1 { color: #fff;  }
-.msg a { margin-left: 20px; background: #408814; color: white; padding: 4px 8px; text-decoration: none; }
-.msg a:hover { background: #266400; }
+        /* --- Main Content Sections --- */
+        .content-section {
+          margin-bottom: 50px;
+          padding: 25px;
+          border: 1px solid var(--border-color);
+          background-color: rgba(13, 17, 23, 0.6); /* Slightly transparent background */
+          position: relative; /* For pseudo-elements like corners */
+          opacity: 0; /* Initially hidden for animation */
+          transform: translateY(20px); /* Start slightly lower */
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
 
-/* //-- yui-grids style overrides -- */
-body { font-family: Georgia; color: #444; }
-#inner { padding: 10px 80px; margin: 80px auto; background: #f5f5f5; border: solid #666; border-width: 8px 0 2px 0; }
-.yui-gf { margin-bottom: 2em; padding-bottom: 2em; border-bottom: 1px solid #ccc; }
+        .content-section.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
-/* //-- header, body, footer -- */
-#hd { margin: 2.5em 0 3em 0; padding-bottom: 1.5em; border-bottom: 1px solid #ccc }
-#hd h2 { text-transform: uppercase; letter-spacing: 2px; }
-#bd, #ft { margin-bottom: 2em; }
+        /* Optional: Add corner brackets */
+        .content-section::before,
+        .content-section::after {
+          content: '';
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          border-color: var(--terminal-green);
+          border-style: solid;
+          opacity: 0.7;
+        }
+        .content-section::before {
+          top: -5px; left: -5px;
+          border-width: 2px 0 0 2px;
+        }
+        .content-section::after {
+          bottom: -5px; right: -5px;
+          border-width: 0 2px 2px 0;
+        }
 
-/* //-- footer -- */
-#ft { padding: 1em 0 5em 0; font-size: 92%; border-top: 1px solid #ccc; text-align: center; }
-#ft p { margin-bottom: 0; text-align: center;   }
+        .section-title {
+          color: var(--terminal-green);
+          font-size: 1.5rem;
+          margin-bottom: 25px;
+          padding-bottom: 5px;
+          border-bottom: 1px dashed var(--secondary-accent);
+          display: inline-block; /* Fit border to text */
+        }
 
-/* //-- core typography and style -- */
-#hd h1 { font-size: 48px; text-transform: uppercase; letter-spacing: 3px; }
-h2 { font-size: 152% }
-h3, h4 { font-size: 122%; }
-h1, h2, h3, h4 { color: #333; }
-p { font-size: 100%; line-height: 18px; padding-right: 3em; }
-a { color: #990003 }
-a:hover { text-decoration: none; }
-strong { font-weight: bold; }
-li { line-height: 24px; border-bottom: 1px solid #ccc; }
-p.enlarge { font-size: 144%; padding-right: 6.5em; line-height: 24px; }
-p.enlarge span { color: #000 }
-.contact-info { margin-top: 7px; }
-.first h2 { font-style: italic; }
-.last { border-bottom: 0 }
+        /* --- Certifications --- */
+        .certifications-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 25px;
+          align-items: start; /* Align items to the top */
+        }
+
+        .cert-item {
+          text-align: center;
+        }
+
+        .cert-item h3 {
+          color: var(--primary-accent);
+          margin-bottom: 10px;
+          font-size: 1.1rem;
+        }
+
+        /* Style Credly embeds if needed */
+        .cert-item div[data-share-badge-host="https://www.credly.com"] {
+          margin: 5px auto; /* Center the badges */
+          background: #fff; /* Add a background if they look odd on dark */
+          border: 1px solid var(--border-color);
+          display: inline-block; /* Ensure proper sizing */
+          max-width: 150px; /* Ensure badge fits container */
+          /* Note: Cookie/CSP warnings in console might originate from these third-party iframes */
+        }
+        .itil-link img {
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .itil-link:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
 
 
-/* //-- section styles -- */
+        /* --- Technical Skills --- */
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 20px;
+        }
 
-a#pdf { display: block; float: left; background: #666; color: white; padding: 6px 50px 6px 12px; margin-bottom: 6px; text-decoration: none;  }
-a#pdf:hover { background: #222; }
+        .skill-list {
+          list-style: none;
+          padding-left: 0; /* Remove default padding */
+        }
 
-.job { position: relative; margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #ccc; }
-.job h4 { position: absolute; top: 0.35em; right: 0 }
-.job p { margin: 0.75em 0 3em 0; }
+        .skill-list li {
+          margin-bottom: 8px;
+          color: var(--text-color);
+          transition: color 0.3s ease;
+        }
 
-.last { border: none; }
-/* .skills-list {  } */
-.skills-list ul { margin: 0; }
-.skills-list li { margin: 3px 0; padding: 3px 0; }
-.skills-list li span { font-size: 152%; display: block; margin-bottom: -2px; padding: 0 }
-.talent { width: 32%; float: left }
-.talent h2 { margin-bottom: 6px; }
+        .skill-list li::before {
+            content: '>'; /* Terminal prompt style */
+            color: var(--secondary-accent);
+            margin-right: 8px;
+            display: inline-block;
+        }
 
-#srt-ttab { margin-bottom: 100px; text-align: center;  }
-#srt-ttab img.last { margin-top: 20px }
+        .skill-list li:hover {
+            color: var(--terminal-green);
+        }
 
-/* --// override to force 1/8th width grids -- */
-.yui-gf .yui-u{width:80.2%;}
-.yui-gf div.first{width:12.3%;}
 
-.yui-u{
-    padding-top: 20px;
-}
+        /* --- Experience & Projects --- */
+        .job-list, .project-list {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .job-entry, .project-entry {
+          padding-left: 15px;
+          border-left: 2px solid var(--primary-accent);
+        }
+
+        .job-header, .project-links {
+          margin-bottom: 10px;
+          display: flex;
+          flex-wrap: wrap; /* Allow wrapping on smaller screens */
+          align-items: baseline; /* Align text nicely */
+          gap: 10px; /* Space between elements */
+        }
+
+        .job-entry h3, .project-entry h3 {
+          color: var(--secondary-accent);
+          font-size: 1.2rem;
+          margin-right: 10px; /* Space before title/dates */
+          flex-shrink: 0; /* Prevent company/project name from shrinking too much */
+        }
+
+        .job-title, .project-meta, .job-dates {
+          font-size: 0.95rem;
+          color: var(--primary-accent);
+          opacity: 0.8;
+        }
+
+        .job-dates {
+            margin-left: auto; /* Push dates to the right on wider screens */
+            white-space: nowrap; /* Prevent dates from wrapping */
+            flex-shrink: 0;
+        }
+
+
+        .contract-tag {
+          font-size: 0.8em;
+          color: var(--border-color);
+          background-color: var(--primary-accent);
+          padding: 2px 5px;
+          border-radius: 3px;
+          margin-left: 5px;
+          font-weight: bold;
+          vertical-align: middle;
+        }
+
+        .job-entry p, .project-entry p {
+          margin-bottom: 10px;
+          padding-left: 5px; /* Indent description */
+        }
+
+        .project-entry a {
+            margin-left: 5px;
+        }
+
+
+        /* --- Counter Section --- */
+        .counter-section p {
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--secondary-accent);
+        }
+        #counter {
+            font-weight: bold;
+            color: var(--terminal-green);
+            padding: 0 5px;
+            display: inline-block; /* Needed for potential future animation */
+            min-width: 30px; /* Prevent layout shift while loading */
+            text-align: center;
+        }
+
+        /* --- Footer --- */
+        .footer {
+          margin-top: 50px;
+          padding-top: 20px;
+          border-top: 1px dashed var(--border-color);
+          text-align: center;
+          font-size: 0.9rem;
+          color: var(--primary-accent);
+          opacity: 0.7;
+        }
+        .footer p {
+            margin-bottom: 5px;
+        }
+        .theme-credit {
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        /* --- Animations --- */
+        /* Typing Cursor */
+        .cursor {
+          display: inline-block;
+          background-color: var(--terminal-green);
+          margin-left: 2px;
+          animation: blink 1s step-end infinite;
+          width: 10px; /* Adjust cursor width */
+          height: 1.2em; /* Match line height */
+          vertical-align: bottom;
+        }
+
+        @keyframes blink {
+          from, to { background-color: transparent }
+          50% { background-color: var(--terminal-green); }
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+          .container {
+            padding: 15px;
+            border-left: none;
+            border-right: none;
+          }
+
+          .header {
+            flex-direction: column; /* Stack header items */
+            align-items: flex-start; /* Align to left */
+            text-align: left;
+          }
+
+          .contact-info {
+            text-align: left; /* Align contact info left */
+            margin-top: 15px;
+            width: 100%; /* Take full width */
+          }
+          .contact-info h3 {
+              margin-bottom: 8px;
+          }
+
+          .job-header {
+              flex-direction: column; /* Stack job header items */
+              align-items: flex-start;
+              gap: 5px;
+          }
+          .job-dates {
+              margin-left: 0; /* Remove push to right */
+          }
+
+          .project-links {
+                flex-direction: column; /* Stack project links */
+                align-items: flex-start;
+                gap: 5px;
+          }
+
+          .skills-grid {
+            grid-template-columns: 1fr; /* Single column for skills */
+          }
+
+          .certifications-grid {
+             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjust badge size */
+          }
+
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px; /* Slightly smaller base font on very small screens */
+            }
+            .header-main h1 {
+                white-space: normal; /* Allow title to wrap if needed */
+            }
+            .content-section {
+                padding: 15px;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+   
