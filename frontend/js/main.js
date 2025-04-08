@@ -15,9 +15,9 @@ const glitchLinks = document.querySelectorAll(GLITCH_SELECTOR);
 /**
  * Fetches the visit count from the Azure Function API and updates the counter element.
  */
-window.addEventListener("DOMContentLoaded", (event) => {
-  getVisitCount()
-})
+// window.addEventListener("DOMContentLoaded", (event) => {
+//   getVisitCount()
+// })
 
 const functionAPI =
   "https://cpresume.azurewebsites.net/api/getResumeCounter?code=idu-Im8g3CYOYmUOf2wREoIWs91T13s8oVTwByxqpJM9AzFuzAbYTw=="
