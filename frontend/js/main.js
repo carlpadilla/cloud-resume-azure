@@ -15,31 +15,30 @@ const glitchLinks = document.querySelectorAll(GLITCH_SELECTOR);
 /**
  * Fetches the visit count from the Azure Function API and updates the counter element.
  */
+window.addEventListener("DOMContentLoaded", (event) => {
+  getVisitCount()
+})
+
+const functionAPI =
+  "https://cpresume.azurewebsites.net/api/getResumeCounter?code=idu-Im8g3CYOYmUOf2wREoIWs91T13s8oVTwByxqpJM9AzFuzAbYTw=="
+
 const getVisitCount = () => {
-    fetch(API_ENDPOINT)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Visit count fetched successfully.");
-            // Ensure count is a number, default to 'N/A' if not
-            const count = (typeof data.count === 'number') ? data.count : 'N/A';
-            if (counterElement) {
-                counterElement.innerText = count;
-            } else {
-                console.error("Counter element not found.");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching visit count:", error);
-            if (counterElement) {
-                counterElement.innerText = "Error"; // Display error to user
-            }
-        });
-};
+  let count = 30
+  fetch(functionAPI)
+    .then((res) => {
+      return res.json()
+    })
+    .then((res) => {
+      console.log(" Hire me, please!")
+      count = res.count
+      document.getElementById("counter").innerText = count
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  return count
+}
+
 
 /**
  * Animates the main title with a typing effect.
